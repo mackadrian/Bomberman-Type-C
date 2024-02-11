@@ -1,8 +1,7 @@
-#ifndef CLEAR_QK.H
-#define CLEAR_QK.H
+#ifndef CLEAR_QK_H
+#define CLEAR_QK_H
 
 #include "types.h"
 
 void clear_screen(UINT32 *base);
-
 #endif
