@@ -267,10 +267,10 @@ typedef unsigned long UINT32;
 # 4 "./raster.h" 2
 
 
-void clear_screen(UINT16 *base);
-void plot_vline(UINT16 *base, int x, int y1, int y2);
-void plot_hline(UINT16 *base, int x1, int y, int x2);
-void plot_bitmap16(UINT16 *base, int x, int y, const UINT16 *bitmap,
+void clear_screen(UINT32 *base);
+void plot_vline(UINT32 *base, int x, int y1, int y2);
+void plot_hline(UINT32 *base, int x1, int y, int x2);
+void plot_bitmap16(UINT32 *base, int x, int y, const UINT32 *bitmap,
 				   unsigned int height);
 # 4 "tst_rast.c" 2
 # 11 "tst_rast.c"
@@ -294,46 +294,33 @@ const UINT16 player[1][256] = {
 
 int main()
 {
-	int x, y;
-	UINT16 *base = (void*)_trap_14_w((short)0x2) ;
+	int x, y, i;
+	UINT32 *base = (void*)_trap_14_w((short)0x2) ;
 	printf("\033E\033f\n");
 
-	printf("Press any key to start testing.\n");
 	_trap_1_w((short)0x08) ;
 
-
-	printf("Plotting x1: 1, y: 200, x2: 639\n");
 	plot_hline(base, 1, 200, 639);
 	_trap_1_w((short)0x08) ;
-	printf("Plotting x1: 0, y: 100, x2: 640\n");
 	plot_hline(base, 0, 100, 640);
 	_trap_1_w((short)0x08) ;
-	printf("Plotting x1: 35, y: 400, x2: 578\n");
-	plot_hline(base, 35, 400, 578);
+	plot_hline(base, 35, 399, 578);
 	_trap_1_w((short)0x08) ;
-	printf("Plotting x1: 35, y: 100, x2: 578\n");
-	plot_hline(base, 35, 100, 578);
+	plot_hline(base, 35, 300, 36);
 	_trap_1_w((short)0x08) ;
 
 
-	printf("Plotting x: 320, y1: 1, y2: 399\n");
-	plot_vline(base, 320, 1, 399);
+	plot_vline(base, 316, 0, 400);
 	_trap_1_w((short)0x08) ;
-	printf("Plotting x: 100, y1: 1, y2: 390\n");
 	plot_vline(base, 100, 1, 400);
 	_trap_1_w((short)0x08) ;
-	printf("Plotting x: 35, y1: 35, y2: 271\n");
 	plot_vline(base, 35, 35, 271);
 	_trap_1_w((short)0x08) ;
-	printf("Plotting x: 78, y1: 100, y2: 300\n");
 	plot_vline(base, 78, 100, 300);
 	_trap_1_w((short)0x08) ;
+
 	clear_screen(base);
-
-	printf("Plotting 16x16 bitmap.\n");
-	plot_bitmap16(base, 1, 1, player, 256);
-	_trap_1_w((short)0x08) ;
-
+# 66 "tst_rast.c"
 	clear_screen(base);
 	return 0;
 }
