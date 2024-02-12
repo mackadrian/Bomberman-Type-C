@@ -5,8 +5,6 @@
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 400
-#define STAGE_WIDTH 400
-#define STAGE_HEIGHT 144
 
 int main()
 {
@@ -16,35 +14,37 @@ int main()
 
 	Cnecin();
 	/*plot_hline*/
-	plot_hline(base, 1, 200, 639);
+	plot_hline(base, 33, 96, 640 - 32);
 	Cnecin();
-	plot_hline(base, 0, 100, 640);
+	plot_hline(base, 33, 128, 640 - 32);
 	Cnecin();
-	plot_hline(base, 35, 399, 578);
+	plot_hline(base, 33, 160, 640 - 32);
 	Cnecin();
-	plot_hline(base, 35, 300, 36);
+	plot_hline(base, 33, 192, 640 - 32);
+	Cnecin();
+	plot_hline(base, 33, 224, 640 - 32);
 	Cnecin();
 
 	/*plot_vline*/
-	plot_vline(base, 316, 1, 399);
+	plot_vline(base, 33, 96, 400 - 36);
 	Cnecin();
-	plot_vline(base, 100, 1, 400);
+	plot_vline(base, 65, 96, 400 - 36);
 	Cnecin();
-	plot_vline(base, 35, 35, 271);
+	plot_vline(base, 97, 96, 400 - 36);
 	Cnecin();
-	plot_vline(base, 78, 100, 300);
+	plot_vline(base, 97 + 16, 96, 400 - 36);
+	Cnecin();
+	plot_vline(base, 97 + (16*2), 96, 400 - 36);
+	Cnecin();
+	plot_vline(base, 97 + (16*3), 96, 400 - 36);
+	Cnecin();
+	plot_vline(base, 97 + (16*4), 96, 400 - 36);
+	Cnecin();
+	plot_vline(base, 97 + (16*5), 96, 400 - 36);
+	Cnecin();
+	plot_vline(base, 97 + (16*6), 96, 400 - 36);
 	Cnecin();
 	
-	clear_screen(base);
-	
-
-	/*
-	printf("Plotting 16x16 bitmap.\n");
-	Cnecin();
-	plot_bitmap16(base, 1, 1, player, 256);
-	Cnecin();
-	*/
-
 	clear_screen(base);
 	return 0;
 }

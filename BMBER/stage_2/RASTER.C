@@ -98,8 +98,8 @@ void plot_hline(UINT32 *base, int x1, int y, int x2)
 }
 
 /*
------ FUNCTION: plot_bitmap16 -----
-Purpose: To plot out a 16x16 bitmap array into the screen.
+----- FUNCTION: plot_bitmap32 -----
+Purpose: To plot out a 32x32 bitmap array into the screen.
 Parameters:	base (unsigned long frame buffer),
 			x (horizontal coordinate),
 			y (vertical coordinate).
@@ -107,7 +107,7 @@ Parameters:	base (unsigned long frame buffer),
 			height (height of the bitmap),
 			width (width of the bitmap)
 */
-void plot_bitmap16(UINT32 *base, int x, int y, const UINT32 *bitmap,
+void plot_bitmap32(UINT32 *base, int x, int y, const UINT32 *bitmap,
 				   unsigned int height)
 {
 	UINT32 *loc = base + (y * 20) + (x >> 5);
