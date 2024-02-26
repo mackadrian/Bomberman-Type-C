@@ -1,30 +1,47 @@
 #include "model.h"
 
+/*----- FUNCTION: move_bomber_man_up -----
+Purpose:	Increments bomberman's position up by 1 pixel.
+*/
 void move_bomberman_up(Bomberman *bomberman)
 {
 	bomberman->y += 1;
 }
 
+/*----- FUNCTION: move_bomber_man_left -----
+Purpose:	Increments bomberman's position down by 1 pixel.
+*/
 void move_bomber_down(Bomberman *bomberman)
 {
 	bomberman->y -= 1;
 }
 
+/*----- FUNCTION: move_bomber_man_right -----
+Purpose:	Increments bomberman's position right by 1 pixel.
+*/
 void move_bomberman_right(Bomberman *bomberman)
 {
 	bomberman->x += 1;
 }
 
+/*----- FUNCTION: move_bomber_man_left -----
+Purpose:	Increments bomberman's position left by 1 pixel.
+*/
 void move_bomberman_left(Bomberman *bomberman)
 {
 	bomberman->x -= 1;
 }
 
-void place_bomb(Bomb *bomb)
+/*----- FUNCTION: place_bomb -----
+Purpose:	Places bomb on Bomberman's current position. Sets a timer of 5 seconds before detonating.
+*/
+void place_bomb(Bomb *bomb, Bomberman *bomberman)
 {
-	
-
-
+	bomberman->x = bomb->x;
+	bombeerman->y = bomb->y;
+	bomb->x = bomb->width;
+	bomb->y = bomb->length;
+	bomb->timer = 5;
 }
 
 
