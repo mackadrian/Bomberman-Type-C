@@ -20,7 +20,7 @@ void clear_screen(UINT32 *base)
 /*
 ----- FUNCTION: plot_vline -----
 Purpose: plots a vertical line in the given y1 and x position.
-		y1 to y2 plots the length of the vertical line.
+		length is added to the chosen y position.
 Parameters: base (unsigned long frame buffer),
 			x (horizontal position),
 			y1 (beginning length of the vert. line),
@@ -44,7 +44,7 @@ void plot_vline(UINT32 *base, int x, int y, int length)
 /*
 ----- FUNCTION: plot_hline -----
 Purpose: plots a horizontal line in the given x1 and y position.
-	 x1 to x2 plots the length of the horizontal line.
+		length is added to the chosen x position.
 Parameters:	base (unsigned long frame buffer),
 			x1 (beginning length of the hor. line),
 			y (vertical position),
@@ -52,8 +52,8 @@ Parameters:	base (unsigned long frame buffer),
 */
 void plot_hline(UINT32 *base, int x, int y, int length)
 {
-	UINT32 *loc = base + (y * 20) + (x >> 5);
 	int i, j, l_shift, r_shift;
+	UINT32 *loc = base + (y * 20) + (x >> 5);
 
 	if (x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT || length >= SCREEN_WIDTH)
 	{
@@ -90,39 +90,19 @@ Parameters:	base (unsigned long frame buffer),
 			height (height of the bitmap),
 			width (width of the bitmap)
 */
-void plot_bitmap32(UINT32 *base, int x, int y, const UINT32 *bitmap,
-				   unsigned int height)
+void plot_bitmap32(UINT32 *base, int x, int y, const UINT32 *bitmap, int height)
 {
-	UINT32 *loc = base + (y * 20) + (x >> 5);
-	int i, shift;
+	int i, loc, shift;
+	loc = ((y * 20) + (x >> 5));
 
 	if (x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
 	{
 		return;
 	}
 
-	shift = x % 32;
-
-	if (shift > 0)
+	for (i = 0; i < height; i++)
 	{
-		for (i = 0; i < SCREEN_HEIGHT && loc < base; i++)
-		{
-			*loc |= bitmap[i] >> shift;
-			loc += 20;
-		}
-		loc = loc - (20 * SCREEN_HEIGHT) + 1;
-		for (i = 0; i < SCREEN_HEIGHT && loc < base; i++)
-		{
-			*loc = (bitmap[i] << 32 - shift);
-			loc += 20;
-		}
-	}
-	else
-	{
-		for (i = 0; i < SCREEN_HEIGHT; i++)
-		{
-			*loc |= bitmap[i];
-			loc += 20;
-		}
+		*(base + loc + (20 * i)) = bitmap[i] >> (x & 31);
+		*(base + loc + (20 * i) + 1) = bitmap[i] << 32 - (x & 31);
 	}
 }
