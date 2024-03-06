@@ -38,16 +38,23 @@ Purpose:	Places bomb on Bomberman's current position. Sets a timer of 5 seconds 
 void place_bomb(Bomb *bomb, Bomberman *bomberman)
 {
 	bomberman->x = bomb->x;
-	bombeerman->y = bomb->y;
+	bomberman->y = bomb->y;
+	bomb->timer = 5;
 	bomb->x = bomb->width;
 	bomb->y = bomb->length;
-	bomb->timer = 5;
+	
 }
 
-
+/*----- FUNCTION: move_enemy -----
+Purpose:	Moves the enemy in a up/down and left/right throughout the stage.
+*/
 void move_enemy(Enemy *enemy)
 {
 	enemy->x += enemy->delta_x;
 	enemy->y += enemy->delta_y;
 }
 
+
+void player_vs_bomb_col(Bomberman *bomberman, Bomb *bomb){
+	/*work*/
+}
